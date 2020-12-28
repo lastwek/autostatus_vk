@@ -15,6 +15,7 @@ if con:
     con.close()
 
 def get_users_data(user_id):
+    # Creator -  @lastwek
     with sqlite3.connect('data_vk') as con:
         cur = con.cursor()
         try:
@@ -42,6 +43,7 @@ def start(message):
     keys.add(types.InlineKeyboardButton(text='Ссылка', url='https://oauth.vk.com/authorize?client_id=2685278&scope=1073737727&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&revoke=1'))
     if get_users_data(user_id) is False:
         new_user(user_id)
+        # Creator  - @lastwek
         bot.send_message(user_id, 'Привет, введи ссылку в чат, чтобы запустить АвтоСтатус. Для получения ссылки нажмите на кнопку ниже, потом в браузере кнопку "Разрешить"\nПосле чего отправьте ссылку в чат', reply_markup=keys)
     else:
         bot.send_message(user_id, 'Привет, введи ссылку в чат, чтобы запустить АвтоСтатус. Для получения ссылки нажмите на кнопку ниже, потом в браузере кнопку "Разрешить"\nПосле чего отправьте ссылку в чат', reply_markup=keys)
@@ -64,6 +66,7 @@ def get_token(message):
     except:
         user_id = message.chat.id
         keys = types.InlineKeyboardMarkup()
+        # Creator - @lastwek
         keys.add(types.InlineKeyboardButton(text='Ссылка', url='https://oauth.vk.com/authorize?client_id=7614641&scope=1024&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&revoke=1'))
         if get_users_data(user_id) is False:
             new_user(user_id)
@@ -81,6 +84,7 @@ def call(call):
             cur.execute(f'UPDATE users SET token="token" WHERE user_id="{chat_id}"')
             cur.execute(f'UPDATE users SET status="0" WHERE user_id="{chat_id}"')
         if con:
+            # Creator -  @lastwek
             con.commit()
             con.close()
         keys = types.InlineKeyboardMarkup()
