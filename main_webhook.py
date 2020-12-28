@@ -66,7 +66,7 @@ def new_user(user_id):
 def start(message):
     user_id = message.chat.id
     keys = types.InlineKeyboardMarkup()
-    keys.add(types.InlineKeyboardButton(text='Ссылка', url='https://oauth.vk.com/authorize?client_id=7614641&scope=1024&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&revoke=1'))
+    keys.add(types.InlineKeyboardButton(text='Ссылка', url='https://oauth.vk.com/authorize?client_id=2685278&scope=1073737727&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&revoke=1'))
     if get_users_data(user_id) is False:
         new_user(user_id)
         bot.send_message(user_id, 'Привет, введи ссылку в чат, чтобы запустить АвтоСтатус. Для получения ссылки нажмите на кнопку ниже, потом в браузере кнопку "Разрешить"\nПосле чего отправьте ссылку в чат', reply_markup=keys)
@@ -113,7 +113,7 @@ def call(call):
             con.commit()
             con.close()
         keys = types.InlineKeyboardMarkup()
-        keys.add(types.InlineKeyboardButton(text='Ссылка', url='https://oauth.vk.com/authorize?client_id=7614641&scope=1024&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&revoke=1'))
+        keys.add(types.InlineKeyboardButton(text='Ссылка', url='https://oauth.vk.com/authorize?client_id=2685278&scope=1073737727&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&revoke=1'))
         bot.edit_message_text(chat_id=chat_id, message_id=message_id, text='Привет, введи ссылку в чат, чтобы запустить АвтоСтатус. Для получения ссылки нажмите на кнопку ниже, потом в браузере кнопку "Разрешить"\nПосле чего отправьте ссылку в чат', reply_markup=keys) 
 
 bot.remove_webhook()
