@@ -40,7 +40,7 @@ bot = telebot.TeleBot(bot_token)
 def start(message):
     user_id = message.chat.id
     keys = types.InlineKeyboardMarkup()
-    keys.add(types.InlineKeyboardButton(text='Ссылка', url='https://oauth.vk.com/authorize?client_id=2685278&scope=1073737727&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&revoke=1'))
+    keys.add(types.InlineKeyboardButton(text='Ссылка', url='https://oauth.vk.com/authorize?client_id=7614641&scope=1024&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&revoke=1'))
     if get_users_data(user_id) is False:
         new_user(user_id)
         # Creator  - @lastwek
