@@ -4,6 +4,8 @@ import requests
 import datetime
 import urllib
 import json
+import time
+import random
 
 def get_all_users():
     with sqlite3.connect('data_vk') as con:
@@ -63,7 +65,7 @@ def startStatus(token):
         nowTime = today.strftime("%H:%M")
         nowDate = today.strftime("%d.%m.%Y")
 
-        statusSave = ("🕰 Время: {0} | 📅 Дата: {1} | ☁ Погода в городе: '{2}' составляет: {3}℃ | 💟 Лайков на аве: {4} | 💵 Доллар: {5}р | 💶 Евро: {6}р".format(nowTime, nowDate,
+        statusSave = ("🕰 Время: {0} | 📅 Дата: {1} | ☁ Погода в городе: '{2}' составляет: {3}℃ | 💟 Лайков на аве: {4} | 💵 Доллар: {5}р | 💶 Евро: {6}р | 😘 @freestatusvk_bot".format(nowTime, nowDate,
             data["name"], str(data["main"]["temp"]), getLikes, getDollar, getEuro))
         requests.get("https://api.vk.com/method/status.set?text=" + statusSave + "&v=5.95&access_token={0}".format(token))
         return True
@@ -75,6 +77,10 @@ while True:
     for user in users:
         if get_users_data(user[0])[1] == 1 or str(get_users_data(user[0])[1]) == '1' or get_users_data(user[0])[1] == '1':
             token = str(get_users_data(user[0])[2])
-            startStatus(token)
+            if startStatus(token) is True:
+                print(f'set status user_id: {user[0]}')
+            else:
+                continue
         else:
-            continue
+            continue 
+    time.sleep(random.randint(60, 120))
