@@ -14,12 +14,13 @@ WEBHOOK_SSL_PRIV = './webhook_pkey.pem'
 
 WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/%s/" % (bot_token)
-
+# Creator - @lastwek
 bot = telebot.TeleBot(bot_token)
 
 class WebhookServer(object):
     @cherrypy.expose
     def index(self):
+        # Creator -  @lastwek
         if 'content-length' in cherrypy.request.headers and \
                         'content-type' in cherrypy.request.headers and \
                         cherrypy.request.headers['content-type'] == 'application/json':
@@ -52,6 +53,7 @@ def get_users_data(user_id):
         con.commit()
         con.close()
 
+        # Creator  - @lastwek
 def new_user(user_id):
     with sqlite3.connect('data_vk') as con:
         cur = con.cursor()
@@ -75,6 +77,7 @@ def start(message):
 @bot.message_handler(content_types=['text'])
 def get_token(message):
     try:
+        # Creator   - @lastwek
         token = message.text.split('=')[1].split('&')[0]
         status_stop = types.InlineKeyboardMarkup()
         status_stop.add(types.InlineKeyboardButton(text='Остановить АвтоСтатус', callback_data='stop'))
@@ -103,6 +106,7 @@ def call(call):
     if call.data == 'stop':
         with sqlite3.connect('data_vk') as con:
             cur = con.cursor()
+            # Creator -   @lastwek
             cur.execute(f'UPDATE users SET token="token" WHERE user_id="{chat_id}"')
             cur.execute(f'UPDATE users SET status="0" WHERE user_id="{chat_id}"')
         if con:
@@ -120,6 +124,7 @@ bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
 cherrypy.config.update({
     'server.socket_host': WEBHOOK_LISTEN,
     'server.socket_port': WEBHOOK_PORT,
+    # Creator  -  @lastwek
     'server.ssl_module': 'builtin',
     'server.ssl_certificate': WEBHOOK_SSL_CERT,
     'server.ssl_private_key': WEBHOOK_SSL_PRIV
