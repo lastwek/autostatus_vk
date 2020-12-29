@@ -1,4 +1,4 @@
-# Test bot: 
+# Test bot: [@freestatusvk_bot](https://t.me/freestatusvk_bot)
 
 # Description of the bot in English:
 The bot performs the function of auto changing the status on the user's page on the VKontakte social network
